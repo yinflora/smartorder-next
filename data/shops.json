@@ -1,0 +1,20 @@
+[
+  {
+    "id": "82719920-b36c-4ead-bfdb-76732f1ea4bf",
+    "name": "測試餐廳",
+    "ownerId": "anonymous",
+    "createdAt": 1768136763976
+  },
+  {
+    "id": "dac94312-c1b4-448c-b08a-7caa678da546",
+    "name": "癮食堂",
+    "ownerId": "anonymous",
+    "createdAt": 1768137395060
+  },
+  {
+    "id": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "name": "癮食堂",
+    "ownerId": "anonymous",
+    "createdAt": 1768233660810
+  }
+]

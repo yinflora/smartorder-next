@@ -1,0 +1,62 @@
+[
+  {
+    "id": "988099e7-fd1c-4894-ba03-c24ade97e80c",
+    "shopId": "dac94312-c1b4-448c-b08a-7caa678da546",
+    "tableNo": "A"
+  },
+  {
+    "id": "8b30971a-5b6d-4d73-b75b-f656f69d4813",
+    "shopId": "dac94312-c1b4-448c-b08a-7caa678da546",
+    "tableNo": "B"
+  },
+  {
+    "id": "9f36543c-18dd-4e58-949f-37cc40faedb5",
+    "shopId": "dac94312-c1b4-448c-b08a-7caa678da546",
+    "tableNo": "C"
+  },
+  {
+    "id": "100bc274-1b4a-4f96-9cbd-7f6d9fdd54c1",
+    "shopId": "dac94312-c1b4-448c-b08a-7caa678da546",
+    "tableNo": "D"
+  },
+  {
+    "id": "742de194-08a1-427a-9ba1-7135082e3562",
+    "shopId": "82719920-b36c-4ead-bfdb-76732f1ea4bf",
+    "tableNo": "A"
+  },
+  {
+    "id": "666d559f-dd59-4194-9cce-0015a5242517",
+    "shopId": "82719920-b36c-4ead-bfdb-76732f1ea4bf",
+    "tableNo": "B"
+  },
+  {
+    "id": "a55ca8a6-d074-4c14-925f-51d6798a1c7f",
+    "shopId": "82719920-b36c-4ead-bfdb-76732f1ea4bf",
+    "tableNo": "C"
+  },
+  {
+    "id": "85bd17c7-598e-4ad5-b151-c90a5bb5eeef",
+    "shopId": "82719920-b36c-4ead-bfdb-76732f1ea4bf",
+    "tableNo": "D"
+  },
+  {
+    "id": "8e36c0ab-7e87-4c5d-9ebe-5b68d3952973",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "A"
+  },
+  {
+    "id": "58e372ea-6910-4e47-ba84-0e61638f9805",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B"
+  },
+  {
+    "id": "3c8c0bb9-6963-4dbe-9d7c-3a6c31d48931",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "C"
+  },
+  {
+    "id": "7d234e41-bb55-405d-a809-12b8ee77646e",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "D"
+  }
+]

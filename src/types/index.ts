@@ -1,0 +1,87 @@
+// Menu types
+export interface MenuItem {
+  id: string;
+  name: string;
+  price: number;
+  image?: string;
+  category: string;
+}
+
+export interface ShopMenu {
+  id: string;
+  shopId: string;
+  brandName: string;
+  categories: string[];
+  items: MenuItem[];
+  isPublished: boolean;
+}
+
+// Shop types
+export interface Shop {
+  id: string;
+  name: string;
+  createdAt: number;
+  ownerId: string;
+}
+
+export type CreateShopInput = Omit<Shop, 'id' | 'createdAt'>;
+export type UpdateShopInput = Partial<Omit<Shop, 'id'>>;
+
+// Reservation types
+export type ReservationSource = '預訂' | '現場';
+export type ReservationStatus = '待入座' | '已入座' | '已取消';
+
+export interface Reservation {
+  id: string;
+  shopId: string;
+  time: string;
+  tableNo: string;
+  phone: string;
+  source: ReservationSource;
+  status: ReservationStatus;
+  checkInTime?: number;
+}
+
+export type CreateReservationInput = Omit<Reservation, 'id' | 'checkInTime'>;
+export type UpdateReservationInput = Partial<Omit<Reservation, 'id' | 'shopId'>>;
+
+// Table types
+export interface Table {
+  id: string;
+  shopId: string;
+  tableNo: string;
+}
+
+// Order types
+export interface OrderItem {
+  menuItemId: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+export type OrderStatus = 'new' | 'served' | 'paid';
+
+export interface Order {
+  id: string;
+  shopId: string;
+  tableNo: string;
+  items: OrderItem[];
+  totalPrice: number;
+  status: OrderStatus;
+  createdAt: number;
+}
+
+export type CreateOrderInput = Omit<Order, 'id' | 'createdAt' | 'status'>;
+export type UpdateOrderInput = Partial<Pick<Order, 'status'>>;
+
+// Menu parsing types (for AI)
+export interface ParsedMenuResult {
+  brandName: string;
+  categories: string[];
+  items: Array<{
+    name: string;
+    price: number;
+    category: string;
+  }>;
+}
