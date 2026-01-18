@@ -9,14 +9,23 @@ SmartOrder 是一個基於 Next.js 15 的全棧應用程式，提供餐廳智慧
 - 自動解析品牌名稱、菜品分類與價格
 - 三步驟快速建立電子菜單
 
+### 🍽️ 進階菜單管理
+- **多分類支援** - 菜品可屬於多個分類（如「套餐」+「午間限定」）
+- **SKU 規格管理** - 支援大中小杯、不同口味等子項目
+- **庫存管理** - 追蹤庫存數量、低庫存警示、售罄狀態
+- **時段管理** - 設定限定供應時段（如早午餐、宵夜場）
+
 ### 📱 QR Code 掃碼點餐
 - 為每個桌號自動生成專屬 QR Code
 - 客戶掃碼即可進入點餐頁面
+- 支援 SKU 規格選擇（大中小杯、不同口味等）
 - 安全雜湊驗證機制，防止未授權訪問
 
 ### 📋 訂單管理
 - 即時接收客戶訂單（5 秒自動刷新）
 - 訂單狀態追蹤：新訂單 → 已上菜 → 已結帳
+- 支援加扣項功能（折扣、服務費、外送費等）
+- 自動計算小計與總金額
 - 依店舖、桌號篩選訂單
 
 ### 📅 訂位管理
@@ -138,6 +147,14 @@ data/                          # JSON 數據檔案
 |------|------|------|
 | GET | `/api/shops/{shopId}/menu` | 取得店舖菜單 |
 | PUT | `/api/shops/{shopId}/menu` | 更新菜單 |
+| POST | `/api/shops/{shopId}/menu/categories` | 新增分類 |
+| PATCH | `/api/shops/{shopId}/menu/categories/{categoryId}` | 更新分類 |
+| DELETE | `/api/shops/{shopId}/menu/categories/{categoryId}` | 刪除分類 |
+| POST | `/api/shops/{shopId}/menu/items/{itemId}/skus` | 新增 SKU |
+| PATCH | `/api/shops/{shopId}/menu/items/{itemId}/skus/{skuId}` | 更新 SKU |
+| DELETE | `/api/shops/{shopId}/menu/items/{itemId}/skus/{skuId}` | 刪除 SKU |
+| PUT | `/api/shops/{shopId}/menu/items/{itemId}/stock` | 更新庫存 |
+| PUT | `/api/shops/{shopId}/menu/items/{itemId}/availability` | 更新時段 |
 
 ### 訂單管理
 | 方法 | 路由 | 描述 |
@@ -146,6 +163,9 @@ data/                          # JSON 數據檔案
 | POST | `/api/orders` | 建立訂單 |
 | PATCH | `/api/orders/{orderId}` | 更新訂單狀態 |
 | DELETE | `/api/orders/{orderId}` | 刪除訂單 |
+| POST | `/api/orders/{orderId}/adjustments` | 新增加扣項 |
+| PATCH | `/api/orders/{orderId}/adjustments/{adjustmentId}` | 更新加扣項 |
+| DELETE | `/api/orders/{orderId}/adjustments/{adjustmentId}` | 刪除加扣項 |
 
 ### 訂位管理
 | 方法 | 路由 | 描述 |
@@ -183,10 +203,18 @@ data/                          # JSON 數據檔案
 
 - **Shop** - 店舖資訊
 - **ShopMenu** - 店舖菜單（一店一菜單）
+  - **Category** - 分類實體（支援排序、啟用/停用）
 - **MenuItem** - 菜單項目
+  - **Sku** - 子項目/規格（如大中小杯、不同口味）
+  - **Stock** - 庫存管理（數量、可售狀態、低庫存警示）
+  - **Availability** - 時段管理（限定供應時段）
 - **Order** - 訂單
+  - **OrderItem** - 訂單細項（支援 SKU 訂購）
+  - **OrderAdjustment** - 加扣項（折扣、服務費等）
 - **Reservation** - 訂位
 - **Table** - 桌號
+
+詳細數據結構請參考 [doc/data_structure.md](doc/data_structure.md)
 
 ## 開發指令
 
