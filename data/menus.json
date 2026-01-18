@@ -1,1 +1,184 @@
-[]
+[
+  {
+    "id": "46b28bf4-b583-4f11-8e77-f2e11790872d",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "brandName": "癮食堂",
+    "categories": [
+      "雞肉/蛋",
+      "牛肉",
+      "海鮮",
+      "豬肉"
+    ],
+    "items": [
+      {
+        "id": "51cb1513-33aa-4c6b-8eba-e14087df2afc",
+        "name": "經典椒麻雞",
+        "price": 280,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "7d938ada-e578-4a7a-848e-ff0f5dde2762",
+        "name": "辣炒雞肉",
+        "price": 300,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "861df399-0a09-4696-8200-1c2eb64d88fb",
+        "name": "翠玉雞丁",
+        "price": 300,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "c5e7e91e-c32f-4b63-a7df-7f93e686fca2",
+        "name": "緬式茶葉雞",
+        "price": 300,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "e4534e54-a20c-4068-a9b0-390062f42448",
+        "name": "泰式椰汁雞",
+        "price": 300,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "35412f57-9fef-43a9-aa15-f715255eae1a",
+        "name": "泰式綠咖哩雞",
+        "price": 320,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "2f71a821-1e97-4b4a-8481-4176b6fda499",
+        "name": "山頭辣子雞",
+        "price": 320,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "9ae49834-4dd1-407c-b54f-b01f91921649",
+        "name": "雲醬桂花蛋",
+        "price": 200,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "160c3ad7-44f7-4991-bdbc-a54837095374",
+        "name": "雲筍烘蛋",
+        "price": 200,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "aac9a10e-ebdc-4428-84e2-70f70f10e926",
+        "name": "雲腿菌菇烘蛋",
+        "price": 300,
+        "category": "雞肉/蛋"
+      },
+      {
+        "id": "a53c458b-c4d4-4cbb-a9d2-68d41e93ff1a",
+        "name": "雲筍苦瓜牛",
+        "price": 380,
+        "category": "牛肉"
+      },
+      {
+        "id": "df0e147b-4f58-49a6-95ea-78a183e896c6",
+        "name": "臘醃菜牛肉",
+        "price": 380,
+        "category": "牛肉"
+      },
+      {
+        "id": "f8f8de0f-37f1-4d7b-90a0-ea210c55d836",
+        "name": "泰式椰汁牛",
+        "price": 380,
+        "category": "牛肉"
+      },
+      {
+        "id": "595f7606-3c74-407c-a806-b572c8a177e4",
+        "name": "辣炒花枝",
+        "price": 380,
+        "category": "海鮮"
+      },
+      {
+        "id": "3d5e7763-9fa0-4549-964b-4a6a4291175f",
+        "name": "緬式魚露蝦",
+        "price": 380,
+        "category": "海鮮"
+      },
+      {
+        "id": "09d9d041-7dd5-4b59-b6d6-5568c44b3b60",
+        "name": "清蒸檸檬蝦",
+        "price": 580,
+        "category": "海鮮"
+      },
+      {
+        "id": "f050d8d0-fd32-4386-baf5-803e00e7c69e",
+        "name": "清蒸檸檬魚",
+        "price": 580,
+        "category": "海鮮"
+      },
+      {
+        "id": "7071abb8-bb62-46f8-b1cd-89fa7385059d",
+        "name": "泰味香酥魚",
+        "price": 580,
+        "category": "海鮮"
+      },
+      {
+        "id": "36818c32-9ff2-40fb-a16c-a46f41fc45bf",
+        "name": "山頭辣子魚",
+        "price": 580,
+        "category": "海鮮"
+      },
+      {
+        "id": "1893e943-f508-4b23-a1dc-9c1c4cd5a4c6",
+        "name": "豆酥鱈魚",
+        "price": 0,
+        "category": "海鮮"
+      },
+      {
+        "id": "8f6e7d06-83f4-4493-9b82-24ff7f8bc428",
+        "name": "緬式魚露鱈魚",
+        "price": 0,
+        "category": "海鮮"
+      },
+      {
+        "id": "08229401-d38c-41f3-a325-bbed6cc58d92",
+        "name": "經典打拋豬",
+        "price": 260,
+        "category": "豬肉"
+      },
+      {
+        "id": "6081815d-d93c-4ffe-8a0c-9083514639a3",
+        "name": "臘醃菜豬肉",
+        "price": 280,
+        "category": "豬肉"
+      },
+      {
+        "id": "cd8a519d-1ab3-4020-983d-9f7601d07428",
+        "name": "雲筍苦瓜豬",
+        "price": 280,
+        "category": "豬肉"
+      },
+      {
+        "id": "0f916d0a-941f-480b-9272-f11208b2fa8e",
+        "name": "蒜苗五花肉",
+        "price": 320,
+        "category": "豬肉"
+      },
+      {
+        "id": "dee28449-c9dd-4793-baec-2cfe67fce10f",
+        "name": "緬式鹹豬肉",
+        "price": 320,
+        "category": "豬肉"
+      },
+      {
+        "id": "c6c19a25-145e-462b-bf06-9a206da0224e",
+        "name": "臘醃菜豬肉炒年糕",
+        "price": 320,
+        "category": "豬肉"
+      },
+      {
+        "id": "fc0a512d-838c-4414-a9ce-2d4cb789acd4",
+        "name": "臘醃菜豬肉炒毛豆",
+        "price": 320,
+        "category": "豬肉"
+      }
+    ],
+    "isPublished": true
+  }
+]

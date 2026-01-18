@@ -120,6 +120,8 @@ export interface Order {
   id: string;
   shopId: string;
   tableNo: string;
+  guestId?: string;
+  guestName?: string;
   items: OrderItem[];
   adjustments?: OrderAdjustment[];
   subtotal: number;

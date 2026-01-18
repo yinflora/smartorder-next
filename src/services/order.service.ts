@@ -2,8 +2,18 @@ import { orderRepository } from '@/lib/repositories';
 import type { Order, CreateOrderInput, OrderStatus, OrderAdjustment } from '@/types';
 
 export const orderService = {
-  async getAll(): Promise<Order[]> {
-    return orderRepository.findAll();
+  async getAll(filters?: { shopId?: string; guestId?: string }): Promise<Order[]> {
+    let orders = await orderRepository.findAll();
+
+    if (filters?.shopId) {
+      orders = orders.filter(o => o.shopId === filters.shopId);
+    }
+
+    if (filters?.guestId) {
+      orders = orders.filter(o => o.guestId === filters.guestId);
+    }
+
+    return orders;
   },
 
   async getById(id: string): Promise<Order | null> {
@@ -35,6 +45,8 @@ export const orderService = {
       id: crypto.randomUUID(),
       shopId: input.shopId,
       tableNo: input.tableNo,
+      guestId: input.guestId,
+      guestName: input.guestName,
       items: input.items,
       adjustments: input.adjustments,
       subtotal,

@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { ShoppingCart, Plus, Minus, Check, UtensilsCrossed } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ShoppingCart, Plus, Minus, Check, UtensilsCrossed, History, ListOrdered, ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui';
 import type { ShopMenu, MenuItem, OrderItem } from '@/types';
+import { useCustomerSession } from '@/hooks/useCustomerSession';
+import { NicknameModal } from './NicknameModal';
+import { OrderConfirmation } from './OrderConfirmation';
+import { OrderHistory } from './OrderHistory';
 
 interface CustomerOrderViewProps {
   menu: ShopMenu;
@@ -11,11 +15,20 @@ interface CustomerOrderViewProps {
   tableNo: string;
 }
 
+type ViewMode = 'MENU' | 'CONFIRMATION' | 'HISTORY';
+
 export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewProps) {
+  const { nickname, guestId, isInitialized, setNickname } = useCustomerSession(tableNo, shopId);
+
   const [cart, setCart] = useState<Map<string, OrderItem>>(new Map());
   const [activeCategory, setActiveCategory] = useState<string>('全部');
+  const [viewMode, setViewMode] = useState<ViewMode>('MENU');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  // New Orders Indicator Logic (Simplified: just show dot if we have history)
+  // In a real app, we'd track "last viewed time" vs "latest order time"
+  const hasHistory = !!guestId;
 
   const addToCart = (item: MenuItem) => {
     const newCart = new Map(cart);
@@ -48,6 +61,16 @@ export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewPr
     setCart(newCart);
   };
 
+  const updateCartItem = (itemId: string, delta: number) => {
+    if (delta > 0) {
+      // Find item in menu to add (this works because itemId is menuItemId currently)
+      const item = menu.items.find(i => i.id === itemId);
+      if (item) addToCart(item);
+    } else {
+      removeFromCart(itemId);
+    }
+  };
+
   const getTotalPrice = () => {
     return Array.from(cart.values()).reduce(
       (sum, item) => sum + item.price * item.quantity,
@@ -59,28 +82,50 @@ export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewPr
     return Array.from(cart.values()).reduce((sum, item) => sum + item.quantity, 0);
   };
 
-  const handleSubmit = async () => {
+  const handleConfirmOrder = async () => {
     if (cart.size === 0) return;
 
     setIsSubmitting(true);
 
     try {
+      // Calculate totals for payload
+      const subtotal = Array.from(cart.values()).reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+      const serviceFeeAmount = Math.round(subtotal * 0.1);
+
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           shopId,
           tableNo,
+          guestId,
+          guestName: nickname,
           items: Array.from(cart.values()),
+          adjustments: [
+            {
+              id: crypto.randomUUID(),
+              name: '服務費 (10%)',
+              type: 'surcharge',
+              valueType: 'percentage',
+              value: 10,
+              amount: serviceFeeAmount,
+            },
+          ],
         }),
       });
 
       if (response.ok) {
-        setIsSubmitted(true);
         setCart(new Map());
+        setViewMode('MENU');
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
       }
     } catch (error) {
       console.error('Failed to submit order:', error);
+      alert('送出訂單失敗，請重試');
     } finally {
       setIsSubmitting(false);
     }
@@ -90,48 +135,97 @@ export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewPr
     (item) => activeCategory === '全部' || item.category === activeCategory
   );
 
-  // Order submitted view
-  if (isSubmitted) {
+  if (!isInitialized) return null; // Prevent hydration mismatch?
+
+  // 1. Session Check
+  if (!nickname) {
+    return <NicknameModal isOpen={true} onSave={setNickname} />;
+  }
+
+  // 2. View Mode: Confirmation
+  if (viewMode === 'CONFIRMATION') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-8 text-center">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-          <Check className="w-10 h-10 text-green-600" />
-        </div>
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">訂單已送出！</h1>
-        <p className="text-slate-600 mb-6">
-          桌號 {tableNo} 的餐點正在準備中
-        </p>
-        <Button onClick={() => setIsSubmitted(false)}>繼續點餐</Button>
+      <OrderConfirmation
+        shopId={shopId}
+        tableNo={tableNo}
+        guestId={guestId}
+        guestName={nickname}
+        cart={cart}
+        onUpdateCart={updateCartItem}
+        onBack={() => setViewMode('MENU')}
+        onConfirm={handleConfirmOrder}
+        isSubmitting={isSubmitting}
+      />
+    );
+  }
+
+  // 3. View Mode: History
+  if (viewMode === 'HISTORY') {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col">
+        <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+          <div className="px-4 py-3 flex items-center justify-between">
+            <button
+              onClick={() => setViewMode('MENU')}
+              className="flex items-center text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 mr-1" />
+              <span className="font-medium">返回菜單</span>
+            </button>
+            <h1 className="text-lg font-bold text-slate-900">歷史訂單</h1>
+            <div className="w-20" /> {/* Spacer for centering */}
+          </div>
+        </header>
+        <OrderHistory shopId={shopId} guestId={guestId} />
       </div>
     );
   }
 
+  // 4. View Mode: Menu (Default)
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-screen pb-24 relative">
+      {/* Toast */}
+      {showToast && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-black/80 text-white px-6 py-3 rounded-full flex items-center shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
+          <Check className="w-5 h-5 mr-2 text-green-400" />
+          <span className="font-medium">訂單已送出！</span>
+        </div>
+      )}
+
       {/* Header */}
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-200">
         <div className="px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xl font-bold text-slate-900">{menu.brandName}</h1>
-              <p className="text-sm text-slate-500">桌號 {tableNo}</p>
+              <div className="flex items-center gap-2 text-sm text-slate-500">
+                <span>桌號 {tableNo}</span>
+                <span>•</span>
+                <span>Hi, {nickname}</span>
+              </div>
             </div>
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-              <UtensilsCrossed className="w-5 h-5 text-blue-600" />
-            </div>
+
+            <button
+              onClick={() => setViewMode('HISTORY')}
+              className="relative w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors"
+            >
+              <History className="w-5 h-5 text-slate-600" />
+              {hasHistory && (
+                <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
+              )}
+            </button>
           </div>
         </div>
 
         {/* Category Tabs */}
-        <div className="px-4 pb-3 overflow-x-auto">
+        <div className="px-4 pb-3 overflow-x-auto no-scrollbar">
           <div className="flex gap-2">
             <button
               onClick={() => setActiveCategory('全部')}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                activeCategory === '全部'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-slate-100 text-slate-600'
-              }`}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${activeCategory === '全部'
+                ? 'bg-blue-500 text-white'
+                : 'bg-slate-100 text-slate-600'
+                }`}
             >
               全部
             </button>
@@ -139,11 +233,10 @@ export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewPr
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                  activeCategory === category
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-slate-100 text-slate-600'
-                }`}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${activeCategory === category
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-slate-100 text-slate-600'
+                  }`}
               >
                 {category}
               </button>
@@ -202,8 +295,8 @@ export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewPr
 
       {/* Cart Summary */}
       {cart.size > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-lg">
-          <div className="flex items-center justify-between">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-lg pb-8 safe-area-bottom">
+          <div className="flex items-center justify-between max-w-lg mx-auto">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <ShoppingCart className="w-6 h-6 text-slate-600" />
@@ -213,8 +306,8 @@ export function CustomerOrderView({ menu, shopId, tableNo }: CustomerOrderViewPr
               </div>
               <span className="text-xl font-bold text-slate-900">${getTotalPrice()}</span>
             </div>
-            <Button onClick={handleSubmit} disabled={isSubmitting} size="lg">
-              {isSubmitting ? '送出中...' : '送出訂單'}
+            <Button onClick={() => setViewMode('CONFIRMATION')} size="lg">
+              去買單
             </Button>
           </div>
         </div>
