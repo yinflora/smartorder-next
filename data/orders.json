@@ -1,1 +1,211 @@
-[]
+[
+  {
+    "id": "7d27fc96-58f8-4204-9dc2-78be82950c26",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "items": [
+      {
+        "menuItemId": "51cb1513-33aa-4c6b-8eba-e14087df2afc",
+        "name": "經典椒麻雞",
+        "price": 280,
+        "quantity": 1
+      },
+      {
+        "menuItemId": "7d938ada-e578-4a7a-848e-ff0f5dde2762",
+        "name": "辣炒雞肉",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "menuItemId": "861df399-0a09-4696-8200-1c2eb64d88fb",
+        "name": "翠玉雞丁",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 880,
+    "totalPrice": 880,
+    "status": "paid",
+    "createdAt": 1768733991371
+  },
+  {
+    "id": "35d9a8a7-294f-435c-832a-7602b97d7f10",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "guestId": "37475bad",
+    "guestName": "jj",
+    "items": [
+      {
+        "menuItemId": "51cb1513-33aa-4c6b-8eba-e14087df2afc",
+        "name": "經典椒麻雞",
+        "price": 280,
+        "quantity": 1
+      },
+      {
+        "menuItemId": "7d938ada-e578-4a7a-848e-ff0f5dde2762",
+        "name": "辣炒雞肉",
+        "price": 300,
+        "quantity": 2
+      },
+      {
+        "menuItemId": "861df399-0a09-4696-8200-1c2eb64d88fb",
+        "name": "翠玉雞丁",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1180,
+    "totalPrice": 1180,
+    "status": "paid",
+    "createdAt": 1768736890098
+  },
+  {
+    "id": "4fdd747c-0345-4546-a404-f8c8a6369885",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "guestId": "37475bad",
+    "guestName": "jj",
+    "items": [
+      {
+        "menuItemId": "51cb1513-33aa-4c6b-8eba-e14087df2afc",
+        "name": "經典椒麻雞",
+        "price": 280,
+        "quantity": 1
+      },
+      {
+        "menuItemId": "7d938ada-e578-4a7a-848e-ff0f5dde2762",
+        "name": "辣炒雞肉",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 580,
+    "totalPrice": 580,
+    "status": "paid",
+    "createdAt": 1768736931079
+  },
+  {
+    "id": "7ee61fba-1ad3-4c6c-874d-8b6397153701",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "guestId": "27bdd390",
+    "guestName": "TestUser",
+    "items": [
+      {
+        "menuItemId": "3d5e7763-9fa0-4549-964b-4a6a4291175f",
+        "name": "緬式魚露蝦",
+        "price": 380,
+        "quantity": 2
+      }
+    ],
+    "subtotal": 760,
+    "totalPrice": 760,
+    "status": "paid",
+    "createdAt": 1768737040894
+  },
+  {
+    "id": "b8af620a-a3de-4268-8d41-b2fbbfe697c3",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "guestId": "27bdd390",
+    "guestName": "TestUser",
+    "items": [
+      {
+        "menuItemId": "51cb1513-33aa-4c6b-8eba-e14087df2afc",
+        "name": "經典椒麻雞",
+        "price": 280,
+        "quantity": 2
+      },
+      {
+        "menuItemId": "7d938ada-e578-4a7a-848e-ff0f5dde2762",
+        "name": "辣炒雞肉",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "adjustments": [
+      {
+        "id": "8292159e-cda1-41d2-9e51-1c1875a2f6b4",
+        "name": "服務費 (10%)",
+        "type": "surcharge",
+        "valueType": "percentage",
+        "value": 10,
+        "amount": 86
+      }
+    ],
+    "subtotal": 860,
+    "totalPrice": 946,
+    "status": "served",
+    "createdAt": 1768738283875
+  },
+  {
+    "id": "0b97616d-8197-499c-ae73-1d44cf8a3f96",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "guestId": "4e5be721",
+    "guestName": "joy",
+    "items": [
+      {
+        "menuItemId": "51cb1513-33aa-4c6b-8eba-e14087df2afc",
+        "name": "經典椒麻雞",
+        "price": 280,
+        "quantity": 2
+      },
+      {
+        "menuItemId": "7d938ada-e578-4a7a-848e-ff0f5dde2762",
+        "name": "辣炒雞肉",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "adjustments": [
+      {
+        "id": "225cdfef-1401-40ed-b6ce-2dd6b26d199b",
+        "name": "服務費 (10%)",
+        "type": "surcharge",
+        "valueType": "percentage",
+        "value": 10,
+        "amount": 86
+      }
+    ],
+    "subtotal": 860,
+    "totalPrice": 946,
+    "status": "paid",
+    "createdAt": 1768739566205
+  },
+  {
+    "id": "4d4f502d-2f4c-4ed2-9d42-c1c7874c2337",
+    "shopId": "380fcb91-c34b-4023-a2e6-813d2455bdc5",
+    "tableNo": "B",
+    "guestId": "4e5be721",
+    "guestName": "joy",
+    "items": [
+      {
+        "menuItemId": "861df399-0a09-4696-8200-1c2eb64d88fb",
+        "name": "翠玉雞丁",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "menuItemId": "c5e7e91e-c32f-4b63-a7df-7f93e686fca2",
+        "name": "緬式茶葉雞",
+        "price": 300,
+        "quantity": 1
+      }
+    ],
+    "adjustments": [
+      {
+        "id": "1b853870-b271-4401-aea5-63c71ec30085",
+        "name": "服務費 (10%)",
+        "type": "surcharge",
+        "valueType": "percentage",
+        "value": 10,
+        "amount": 60
+      }
+    ],
+    "subtotal": 600,
+    "totalPrice": 660,
+    "status": "new",
+    "createdAt": 1768739617432
+  }
+]

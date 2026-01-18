@@ -5,14 +5,10 @@ import { orderService } from '@/services';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const shopId = searchParams.get('shopId');
+    const shopId = searchParams.get('shopId') || undefined;
+    const guestId = searchParams.get('guestId') || undefined;
 
-    if (shopId) {
-      const orders = await orderService.getByShopId(shopId);
-      return NextResponse.json(orders);
-    }
-
-    const orders = await orderService.getAll();
+    const orders = await orderService.getAll({ shopId, guestId });
     return NextResponse.json(orders);
   } catch (error) {
     console.error('Error fetching orders:', error);
@@ -42,6 +38,8 @@ export async function POST(request: NextRequest) {
     const order = await orderService.create({
       shopId: body.shopId,
       tableNo: body.tableNo,
+      guestId: body.guestId,
+      guestName: body.guestName,
       items: body.items,
       adjustments: body.adjustments,
       subtotal,
