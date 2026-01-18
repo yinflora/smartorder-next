@@ -1,17 +1,61 @@
 // Menu types
+
+// Category (分類實體)
+export interface Category {
+  id: string;
+  name: string;
+  sortOrder?: number;
+  isActive: boolean;
+}
+
+// Stock Management
+export interface Stock {
+  quantity: number;
+  isAvailable: boolean;
+  lowStockThreshold?: number;
+}
+
+// Time Slot
+export interface TimeSlot {
+  startTime: string;  // Format: "HH:mm"
+  endTime: string;
+  days?: number[];    // 0=Sunday, 6=Saturday
+}
+
+// Availability
+export interface Availability {
+  timeSlots?: TimeSlot[];
+  isAlwaysAvailable?: boolean;
+}
+
+// SKU (子項目/規格)
+export interface Sku {
+  id: string;
+  name: string;
+  price?: number;
+  image?: string;
+  stock?: Stock;
+  availability?: Availability;
+}
+
+// MenuItem (支援多分類、庫存、時段、SKU)
 export interface MenuItem {
   id: string;
   name: string;
   price: number;
+  categoryIds: string[];
   image?: string;
-  category: string;
+  stock?: Stock;
+  availability?: Availability;
+  skus?: Sku[];
 }
 
+// ShopMenu (菜單主體)
 export interface ShopMenu {
   id: string;
   shopId: string;
   brandName: string;
-  categories: string[];
+  categories: Category[];
   items: MenuItem[];
   isPublished: boolean;
 }
@@ -55,9 +99,19 @@ export interface Table {
 // Order types
 export interface OrderItem {
   menuItemId: string;
+  skuId?: string;
   name: string;
-  quantity: number;
   price: number;
+  quantity: number;
+}
+
+export interface OrderAdjustment {
+  id: string;
+  name: string;
+  type: 'discount' | 'surcharge';
+  valueType: 'fixed' | 'percentage';
+  value: number;
+  amount: number;
 }
 
 export type OrderStatus = 'new' | 'served' | 'paid';
@@ -67,13 +121,15 @@ export interface Order {
   shopId: string;
   tableNo: string;
   items: OrderItem[];
+  adjustments?: OrderAdjustment[];
+  subtotal: number;
   totalPrice: number;
   status: OrderStatus;
   createdAt: number;
 }
 
 export type CreateOrderInput = Omit<Order, 'id' | 'createdAt' | 'status'>;
-export type UpdateOrderInput = Partial<Pick<Order, 'status'>>;
+export type UpdateOrderInput = Partial<Pick<Order, 'status' | 'adjustments' | 'totalPrice'>>;
 
 // Menu parsing types (for AI)
 export interface ParsedMenuResult {

@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Calculate total price
-    const totalPrice = body.items.reduce(
+    // Calculate subtotal
+    const subtotal = body.items.reduce(
       (sum: number, item: { price: number; quantity: number }) =>
         sum + item.price * item.quantity,
       0
@@ -43,7 +43,9 @@ export async function POST(request: NextRequest) {
       shopId: body.shopId,
       tableNo: body.tableNo,
       items: body.items,
-      totalPrice,
+      adjustments: body.adjustments,
+      subtotal,
+      totalPrice: subtotal, // Service 會重新計算
     });
 
     return NextResponse.json(order, { status: 201 });
