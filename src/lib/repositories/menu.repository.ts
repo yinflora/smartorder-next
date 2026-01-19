@@ -1,4 +1,4 @@
-import { readJsonFile, writeJsonFile } from './json-storage';
+import { readJsonFile, writeJsonFile } from '@/lib/repositories/json-storage';
 import type { ShopMenu } from '@/types';
 
 const FILENAME = 'menus.json';

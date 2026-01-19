@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { shopService, reservationService, menuService } from '@/services';
-import { ReservationList } from './_components/ReservationList';
-import { ShopHeader } from '../_components/ShopHeader';
+import { ReservationList } from '@/app/(admin)/shops/[shopId]/booking/_components/ReservationList';
+import { ShopHeader } from '@/app/(admin)/shops/[shopId]/_components/ShopHeader';
 
 export default async function BookingPage({
   params,

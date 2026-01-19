@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { menuService } from '@/services';
 import { validateServerTableHash } from '@/lib/utils/crypto';
-import { CustomerOrderView } from './_components/CustomerOrderView';
+import { CustomerOrderView } from '@/app/(customer)/order/[shopId]/[tableNo]/[hash]/_components/CustomerOrderView';
 
 export default async function OrderPage({
   params,

@@ -4,5 +4,5 @@
  * - useOrders: Used by OrderList component
  * - useReservations: Used by ReservationList component
  */
-export { useOrders } from './useOrders';
-export { useReservations } from './useReservations';
+export { useOrders } from '@/hooks/useOrders';
+export { useReservations } from '@/hooks/useReservations';

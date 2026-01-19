@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { shopService, orderService } from '@/services';
-import { OrderList } from './_components/OrderList';
-import { ShopHeader } from '../_components/ShopHeader';
+import { OrderList } from '@/app/(admin)/shops/[shopId]/orders/_components/OrderList';
+import { ShopHeader } from '@/app/(admin)/shops/[shopId]/_components/ShopHeader';
 
 export default async function OrdersPage({
   params,

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { shopService, menuService } from '@/services';
-import { MenuEditor } from './_components/MenuEditor';
-import { ShopHeader } from '../_components/ShopHeader';
+import { MenuEditor } from '@/app/(admin)/shops/[shopId]/menu/_components/MenuEditor';
+import { ShopHeader } from '@/app/(admin)/shops/[shopId]/_components/ShopHeader';
 
 export default async function MenuPage({
   params,

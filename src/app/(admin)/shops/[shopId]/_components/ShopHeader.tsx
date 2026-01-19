@@ -1,4 +1,4 @@
-import { ShopTabs } from './ShopTabs';
+import { ShopTabs } from '@/app/(admin)/shops/[shopId]/_components/ShopTabs';
 
 interface ShopHeaderProps {
   shopName: string;

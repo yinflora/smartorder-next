@@ -1,4 +1,4 @@
-import { ApiError, NetworkError, NotFoundError, ValidationError } from '../errors';
+import { ApiError, NetworkError, NotFoundError, ValidationError } from '@/lib/errors';
 
 const BASE_URL = '';
 

@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export { Card, CardContent } from './Card';
+export { Button } from '@/components/ui/Button';
+export { Card, CardContent } from '@/components/ui/Card';

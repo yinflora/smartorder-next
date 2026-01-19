@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { PieChart } from 'lucide-react';
 import { shopService } from '@/services';
-import { ShopHeader } from '../_components/ShopHeader';
+import { ShopHeader } from '@/app/(admin)/shops/[shopId]/_components/ShopHeader';
 
 export default async function ReportsPage({
   params,

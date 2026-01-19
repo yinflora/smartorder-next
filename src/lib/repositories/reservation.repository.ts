@@ -1,4 +1,4 @@
-import { createJsonRepository } from './json-storage';
+import { createJsonRepository } from '@/lib/repositories/json-storage';
 import type { Reservation, CreateReservationInput, UpdateReservationInput } from '@/types';
 
 const baseRepository = createJsonRepository<

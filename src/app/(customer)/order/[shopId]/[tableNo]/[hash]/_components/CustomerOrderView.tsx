@@ -5,9 +5,9 @@ import { ShoppingCart, Plus, Minus, Check, UtensilsCrossed, History, ListOrdered
 import { Button } from '@/components/ui';
 import type { ShopMenu, MenuItem, OrderItem } from '@/types';
 import { useCustomerSession } from '@/hooks/useCustomerSession';
-import { NicknameModal } from './NicknameModal';
-import { OrderConfirmation } from './OrderConfirmation';
-import { OrderHistory } from './OrderHistory';
+import { NicknameModal } from '@/app/(customer)/order/[shopId]/[tableNo]/[hash]/_components/NicknameModal';
+import { OrderConfirmation } from '@/app/(customer)/order/[shopId]/[tableNo]/[hash]/_components/OrderConfirmation';
+import { OrderHistory } from '@/app/(customer)/order/[shopId]/[tableNo]/[hash]/_components/OrderHistory';
 
 interface CustomerOrderViewProps {
   menu: ShopMenu;
